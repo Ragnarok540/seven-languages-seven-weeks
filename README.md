@@ -1,1 +1,1 @@
-# kaggle_courses
+# seven languages seven weeks
