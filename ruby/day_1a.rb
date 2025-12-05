@@ -16,6 +16,10 @@ while x < 10
     x = x + 1
 end
 
+# Alternative
+
+10.times {puts "nova alt"}
+
 # Print the string “This is sentence number 1,” where the number 1 changes from 1 to 10.
 
 x = 1
@@ -24,3 +28,7 @@ until x > 10
     puts "This is sentence number #{x}"
     x = x + 1
 end
+
+# Alternative
+
+(1..10).each {|num| puts "This is sentence number #{num} alt"}
