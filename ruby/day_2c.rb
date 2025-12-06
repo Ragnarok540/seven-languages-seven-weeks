@@ -4,24 +4,24 @@
 # is surprisingly simple in Ruby.) If you want, include line numbers.
 
 def process_argv(option)
-  case option[0]
-    when "-h", "--help"
-      puts "usage: ruby day_2c.rb [-h] [-v] file_name pattern"
-      puts ""
-      puts "positional arguments:"
-      puts "  file_name pattern"
-      puts ""
-      puts "optional arguments:"
-      puts "  -h, --help     show this help message and exit"
-      puts "  -v, --version  print version number on screen and exit"
-      exit
-    when "-v", "--version"
-      puts "rgrep version 0.0.1 - Ruby Grep"
-      exit
-    else
-      @options[:file_name] = option[0]
-      @options[:pattern] = option[1]
-  end
+    case option[0]
+        when "-h", "--help"
+            puts "usage: ruby day_2c.rb [-h] [-v] file_name pattern"
+            puts ""
+            puts "positional arguments:"
+            puts "  file_name pattern"
+            puts ""
+            puts "optional arguments:"
+            puts "  -h, --help     show this help message and exit"
+            puts "  -v, --version  print version number on screen and exit"
+            exit
+        when "-v", "--version"
+            puts "rgrep version 0.0.1 - Ruby Grep"
+            exit
+        else
+            @options[:file_name] = option[0]
+            @options[:pattern] = option[1]
+    end
 end
 
 @options = {}
