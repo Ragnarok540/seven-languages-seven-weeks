@@ -12,3 +12,5 @@ Account deposit(10.0)
 
 "Final: " print
 Account show
+
+// io day_1.io
