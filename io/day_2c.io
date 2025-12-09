@@ -39,13 +39,39 @@ Matrix := Object clone do(
         )
         NewMatrix
     )
+    loadFile := method(file,
+        f := File with(file)
+        f openForReading
+        l := f readLine
+        while(l != nil,
+            cells append(l split(","))
+            l := f readLine
+        )
+        f close
+    )
+    writeFile := method(file,
+        f := File with(file)
+        f openForUpdating
+        ysz := cells size
+        xsz := cells at(0) size
+        for(i, 0, ysz - 1,
+            for(j, 0, xsz - 1,
+                f write(get(j, i))
+                f write(",")
+            )
+            f write("\n")
+        )
+        f close
+    )
     show := method(write(cells))
 )
 
 Matrix dim(5, 4)
-
 Matrix set(2, 3, 5)
-
 Matrix get(2, 3) println
-
 Matrix transpose get(3, 2) println
+
+Matrix cells = list()
+Matrix loadFile("matrix.txt")
+Matrix show
+Matrix transpose writeFile("matrixt.txt")
