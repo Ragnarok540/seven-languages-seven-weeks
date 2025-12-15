@@ -1,3 +1,5 @@
+:- include('util.pl').
+
 % • Reverse the elements of a list.
 
 reverse2([], []).
@@ -11,10 +13,19 @@ reverse2([H|T], RevList) :-
 
 % reverse3([3, 2, 1], X, []).
 
+reverse4([]) --> [].
+reverse4([L|Ls]) --> reverse4(Ls), [L].
+
+% phrase(reverse4([a,b,c]), Ls).
+
 % • Find the smallest element of a list.
 
+num_num_min(X, Y, Min) :-
+    Min #= min(X, Y).
 
+list_min([H|T], Min) :-
+    foldl(num_num_min, T, H, Min).
+
+% list_min([3,1,2], Min).
 
 % • Sort the elements of a list.
-
-
