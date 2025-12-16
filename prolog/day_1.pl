@@ -1,3 +1,5 @@
+% [day_1].
+
 author(tolkien, lotr).
 author(martin, got).
 author(tolkien, hobbit).

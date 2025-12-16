@@ -1,5 +1,7 @@
 :- include('util.pl').
 
+% [day_2].
+
 % • Reverse the elements of a list.
 
 reverse2([], []).
@@ -10,11 +12,13 @@ reverse2([H|T], RevList) :-
  reverse3([], Z, Z).
  reverse3([H|T], Z, Acc) :-
     reverse3(T, Z, [H|Acc]).
+reverse3(Ls, X) :-
+    reverse3(Ls, X, []).
 
-% reverse3([3, 2, 1], X, []).
+% reverse3([3, 2, 1], X).
 
 reverse4([]) --> [].
-reverse4([L|Ls]) --> reverse4(Ls), [L].
+reverse4([H|T]) --> reverse4(T), [H].
 
 % phrase(reverse4([a,b,c]), Ls).
 
@@ -29,3 +33,14 @@ list_min([H|T], Min) :-
 % list_min([3,1,2], Min).
 
 % • Sort the elements of a list.
+
+sort2([], Z, Z).
+sort2(Unsorted, Sorted, Acc) :-
+    list_min(Unsorted, Min),
+    select(Min, Unsorted, UnsortedF),
+    % delete(Unsorted, Min, UnsortedF),
+    sort2(UnsortedF, Sorted, [Min|Acc]).
+sort2(Unsorted, Sorted) :-
+    sort2(Unsorted, Sorted, []).
+
+% sort2([2,3,4,1], X).
