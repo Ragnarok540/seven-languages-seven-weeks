@@ -1,3 +1,7 @@
+% • Modify the Sudoku solver to work on six-by-six puzzles (squares
+% are 3x2) and 9x9 puzzles.
+% • Make the Sudoku solver print prettier solutions.
+
 sudoku(Puzzle, Solution) :-
     Solution = Puzzle,
     Puzzle = [E11, E12, E13, E14, E15, E16, E17, E18, E19,
