@@ -6,7 +6,6 @@ def totalSize(list: List[String]): Int =
 // • Write a Censor trait with a method that will replace the curse words
 // Shoot and Darn with Pucky and Beans alternatives. Use a map to
 // store the curse words and their alternatives.
-// • Load the curse words and alternatives from a file.
 
 trait Censor:
     def replace(censorWords: Map[String, String], word: String): String =
@@ -20,8 +19,8 @@ class Reader() extends Censor:
 
 
 @main def main() =
-    val ls1: List[String] = List("hello", "world")
-    println(totalSize(ls1))
+    val ls: List[String] = List("hello", "world")
+    println(totalSize(ls))
 
     val censorWords = Map("Shoot" -> "Pucky", "Darn" -> "Beans")
     val input = List("Fuck", "Darn", "Shit", "Kill", "Shoot")
