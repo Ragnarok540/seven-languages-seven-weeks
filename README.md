@@ -15,3 +15,15 @@ http://www.gprolog.org/
 ## Scala
 
 https://docs.scala-lang.org/
+
+## Erlang
+
+https://www.erlang.org/docs/19/
+
+## Clojure
+
+https://clojure.org/reference/reader
+
+## Haskell
+
+https://www.haskell.org/documentation/
