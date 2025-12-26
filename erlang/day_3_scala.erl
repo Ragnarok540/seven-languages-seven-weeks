@@ -8,6 +8,27 @@
 % import scala.actors._
 % import Actor._
 
+-module(day_3_scala).
+-export([get_page/1, start/0]).
+
+
+start() ->
+    inets:start(),
+    ssl:start(),
+    Body = get_page("http://www.erlang.org/about"),
+    Length = string:length(Body),
+    io:format("~p\n", [Length]).
+
+get_page(URL) ->
+	case httpc:request(URL) of
+		{ok, {{_, 200, _}, _, Body}} -> Body;
+		{error, Err} ->
+			io:format("ERROR: ~p~n", [Err])
+	end.
+
+% c(day_3_scala).
+% day_3_scala:start().
+
 % // START:loader
 % object PageLoader {
 %  def getPageSize(url : String) = Source.fromURL(url).mkString.length
