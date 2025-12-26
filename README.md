@@ -8,6 +8,8 @@ https://poignant.guide/book/
 ## Io
 
 https://iolanguage.org/samples/index.html
+https://soft.vub.ac.be/~tvcutsem/talks/presentations/IO-tvcutsem-26-11-04.pdf
+https://what.happens.when.computer/2015-11-20/io-basics/
 
 ## Prolog
 
@@ -30,4 +32,5 @@ https://clojure.org/reference/reader
 ## Haskell
 
 https://www.haskell.org/documentation/
-https://learnyouahaskell.github.io/introduction.html
+https://learnyouahaskell.github.io/chapters.html
+https://downloads.haskell.org/ghc/latest/docs/users_guide/

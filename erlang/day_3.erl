@@ -105,5 +105,4 @@ roulette_process() ->
 % revolver ! 4.
 % monitor ! kill.
 
-% • Create a basic OTP server that logs messages to a file.
 % • Make the translate_service work across a network.
