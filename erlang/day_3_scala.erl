@@ -4,80 +4,48 @@
 % and load them as well. For example, a sizer for “google.com” would
 % compute the size for Google and all of the pages it links to.
 
-% import scala.io._
-% import scala.actors._
-% import Actor._
-
 -module(day_3_scala).
--export([get_page/1, start/0]).
-
+-export([start/0, get_page/1, get_length/1, time_it/2, sequential/1, concurrent/1]).
 
 start() ->
     inets:start(),
     ssl:start(),
-    Body = get_page("http://www.erlang.org/about"),
-    Length = string:length(Body),
-    io:format("~p\n", [Length]).
+    UrlList = ["https://www.bbc.com/", 
+               "http://www.erlang.org/",
+               "http://www.google.com/",
+               "http://www.cnn.com/"],
+    io:format("Sequential:\n", []),
+    time_it(sequential, [UrlList]),
+    io:format("\nConcurrent:\n", []),
+    time_it(concurrent, [UrlList]).
 
-get_page(URL) ->
-	case httpc:request(URL) of
+get_page(Url) ->
+	case httpc:request(Url) of
 		{ok, {{_, 200, _}, _, Body}} -> Body;
 		{error, Err} ->
 			io:format("ERROR: ~p~n", [Err])
 	end.
 
+get_length(Url) ->
+    Body = get_page(Url),
+    Length = string:length(Body),
+    io:format("Site: ~p, Length: ~p\n", [Url, Length]).
+
+time_it(Fun, Args) ->
+    {Time, _Value} = timer:tc(?MODULE, Fun, Args),
+    io:format("Time: ~p\n", [Time]).
+
+sequential([]) -> ok;
+sequential(UrlList) ->
+    [H|T] = UrlList,
+    get_length(H),
+    sequential(T).
+
+concurrent([]) -> ok;
+concurrent(UrlList) ->
+    [H|T] = UrlList,
+    spawn(?MODULE, get_length, [H]),
+    concurrent(T).
+
 % c(day_3_scala).
 % day_3_scala:start().
-
-% // START:loader
-% object PageLoader {
-%  def getPageSize(url : String) = Source.fromURL(url).mkString.length
-% }
-% // END:loader
-
-% val urls = List("http://www.amazon.com/", 
-%                "http://www.twitter.com/",
-%                "http://www.google.com/",
-%                "http://www.cnn.com/" )
-
-% // START:time
-% def timeMethod(method: () => Unit) = {
-%  val start = System.nanoTime
-%  method()
-%  val end = System.nanoTime
-%  println("Method took " + (end - start)/1000000000.0 + " seconds.")
-% }
-% // END:time
-
-% // START:sequential
-% def getPageSizeSequentially() = {
-%  for(url <- urls) {
-%    println("Size for " + url + ": " + PageLoader.getPageSize(url))
-%  }
-% }
-% // END:sequential
-
-% // START:concurrent
-% def getPageSizeConcurrently() = {
-%  val caller = self
-
-%  for(url <- urls) {
-%    actor { caller ! (url, PageLoader.getPageSize(url)) }
-%  }
-
-%  for(i <- 1 to urls.size) {
-%    receive {
-%      case (url, size) =>
-%        println("Size for " + url + ": " + size)            
-%    }
-%  }
-% }
-% // END:concurrent
-
-% // START:script
-% println("Sequential run:")
-% timeMethod { getPageSizeSequentially }
-
-% println("Concurrent run")
-% timeMethod { getPageSizeConcurrently }
-% // END:script
