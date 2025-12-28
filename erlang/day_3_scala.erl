@@ -5,7 +5,15 @@
 % compute the size for Google and all of the pages it links to.
 
 -module(day_3_scala).
--export([start/0, get_page/1, get_length/1, time_it/2, sequential/1, concurrent/1]).
+-export([start/0,
+    get_page/1,
+    get_length/1,
+    time_it/2,
+    sequential/1,
+    concurrent/1,
+    start_re/0,
+    get_uppercase/1,
+    print_captured/2]).
 
 start() ->
     inets:start(),
@@ -47,5 +55,31 @@ concurrent(UrlList) ->
     spawn(?MODULE, get_length, [H]),
     concurrent(T).
 
+start_re() ->
+    inets:start(),
+    ssl:start(),
+    Body = get_page("http://www.erlang.org/"),
+    Captured = get_uppercase(Body),
+print_captured(Body, Captured).
+
+get_uppercase(Body) ->
+    Regex = "([A-Z])\\w+",
+    {ok, Re} = re:compile(Regex, [multiline]),
+    case re:run(Body, Re, [global]) of
+        {match, Captured} ->
+            Captured;
+        nomatch ->
+            io:format("No match.\n", [])
+    end.
+
+print_captured(_, []) -> ok;
+print_captured(Body, Captured) ->
+    [H|T] = Captured,
+    [{Start, Length}, _] = H,
+    Match = string:slice(Body, Start, Length),
+    io:format("~p~n", [Match]),
+    print_captured(Body, T).
+
 % c(day_3_scala).
 % day_3_scala:start().
+% day_3_scala:start_re().

@@ -22,12 +22,13 @@
 
 ## Erlang
 
-- https://www.erlang.org/docs/19/
+- https://www.erlang.org/doc/readme.html
 - https://learnyousomeerlang.com/content
 
 ## Clojure
 
 - https://clojure.org/reference/reader
+- https://clojure.org/guides/learn/clojure
 
 ## Haskell
 
