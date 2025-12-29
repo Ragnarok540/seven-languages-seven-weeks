@@ -18,10 +18,10 @@
 start() ->
     inets:start(),
     ssl:start(),
-    UrlList = ["https://www.bbc.com/", 
-               "http://www.erlang.org/",
-               "http://www.google.com/",
-               "http://www.cnn.com/"],
+    UrlList = ["https://www.bbc.com/",
+        "http://www.erlang.org/",
+        "http://www.google.com/",
+        "http://www.cnn.com/"],
     io:format("Sequential:\n", []),
     time_it(sequential, [UrlList]),
     io:format("\nConcurrent:\n", []),
@@ -60,7 +60,7 @@ start_re() ->
     ssl:start(),
     Body = get_page("http://www.erlang.org/"),
     Captured = get_uppercase(Body),
-print_captured(Body, Captured).
+    print_captured(Body, Captured).
 
 get_uppercase(Body) ->
     Regex = "([A-Z])\\w+",
