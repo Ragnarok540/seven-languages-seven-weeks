@@ -27,3 +27,6 @@
 (println @account1 @account2)
 (transfer-money account1 account2 50)
 (println @account1 @account2)
+
+;; Sleeping Barber problem will be solved in Erlang.
+;; See erlang/day_3_clojure.erl
