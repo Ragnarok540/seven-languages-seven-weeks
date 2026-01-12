@@ -9,6 +9,9 @@ allEven (h : t) = if even h then h:allEven t else allEven t
 allEven2 :: [Integer] -> [Integer]
 allEven2 x = [a | a <- x, even a]
 
+allEven3 :: [Integer] -> [Integer]
+allEven3 x = filter even x
+
 -- • Write a function that takes a list and returns the same list in
 -- reverse.
 
@@ -56,6 +59,7 @@ main = putStrLn "Hello, World!"
 -- main
 -- allEven [1, 2, 3, 4, 5, 6, 7, 8, 9]
 -- allEven2 [1, 2, 3, 4, 5, 6, 7, 8, 9]
+-- allEven3 [1, 2, 3, 4, 5, 6, 7, 8, 9]
 -- reverse2 [1, 2, 3, 4, 5, 6, 7, 8, 9]
 -- reverse2 ['a', 'b', 'c']
 -- all_two_tuples ["black", "white", "blue", "yellow", "red"]
