@@ -1,3 +1,5 @@
+module Main where
+
 -- • Write a sort that takes a list and returns a sorted list.
 
 import Data.List
@@ -27,13 +29,27 @@ cleanPrice price =
 -- Combine these functions through composition to return every
 -- eighth number, beginning with x + y.
 
+myRange :: Integer -> Integer -> [Integer]
+myRange start step = start:(myRange (start + step) step)
 
+everyThird :: Integer -> [Integer]
+everyThird start = myRange start 3
+
+everyFifth :: Integer -> [Integer]
+everyFifth start = myRange start 5
+
+everyEigth :: Integer -> [Integer]
+everyEigth start = zipWith (+) (everyThird start) (everyFifth start)
 
 -- • Use a partially applied function to define a function that will
 -- return half of a number and another that will append \n to the end
 -- of any string.
 
+half :: Float -> Float
+half = (/ 2.0)
 
+newLine :: String -> String
+newLine = (++ "\n")
 
 -- • Write a function to determine the greatest common denominator
 -- of two integers.
@@ -43,10 +59,17 @@ cleanPrice price =
 -- • Create a lazy sequence of prime numbers.
 
 
+
+main :: IO ()
+main = putStrLn (newLine "Hello, World!")
+
 -- ghci
 -- :load day_2.hs
 -- main
 -- sort [4, 7, 3, 2, 8, 3]
 -- sortNumeric [4, 7, 3, 2, 8, 3]
 -- cleanPrice "$002,345,678.99"
-
+-- take 5 (everyThird 2)
+-- take 5 (everyFifth 2)
+-- take 5 (everyEigth 2)
+-- half 8.0
