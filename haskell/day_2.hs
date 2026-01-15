@@ -54,11 +54,21 @@ newLine = (++ "\n")
 -- • Write a function to determine the greatest common denominator
 -- of two integers.
 
-
+gcd1 :: Integer -> Integer -> Integer
+gcd1 n m = if m == 0 then n else gcd1 m (mod n m)
 
 -- • Create a lazy sequence of prime numbers.
 
+isPrime :: Integer -> Bool
+isPrime n = (abs n) > 1 && isNotDivisor 2 where
+    isNotDivisor d = d * d > (abs n) || ((mod (abs n) d) /= 0 && isNotDivisor (d + 1)) 
 
+allNums :: Integer -> [Integer]
+allNums start = start:(allNums (start + 1))
+
+primes :: Integer -> [Integer]
+primes start =
+    if isPrime start then start:(primes (start + 1)) else primes (start + 1)
 
 main :: IO ()
 main = putStrLn (newLine "Hello, World!")
@@ -73,3 +83,11 @@ main = putStrLn (newLine "Hello, World!")
 -- take 5 (everyFifth 2)
 -- take 5 (everyEigth 2)
 -- half 8.0
+-- gcd1 13 27
+-- gcd 20536 7826
+-- isPrime 1
+-- isPrime 2
+-- isPrime 7
+-- isPrime 100
+-- take 5 (allNums 0)
+-- take 10 (primes 2)
